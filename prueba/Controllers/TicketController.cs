@@ -94,7 +94,7 @@ namespace prueba.Controllers
                     ID_Cliente = existsClient.ID_Cliente,
                     ID_Lista = listaMenorMinutos.ID_lista,
                     ID_ListaCliente = Guid.NewGuid(),
-                    Fecha = ultimoCliente == null ? DateTime.Now : ultimoCliente.Fecha.AddMinutes(listaMenorMinutos.Duracion)
+                    Fecha = ultimoCliente == null ? DateTime.Now.AddMinutes(listaMenorMinutos.Duracion) : ultimoCliente.Fecha.AddMinutes(listaMenorMinutos.Duracion)
                 }); 
 
 
