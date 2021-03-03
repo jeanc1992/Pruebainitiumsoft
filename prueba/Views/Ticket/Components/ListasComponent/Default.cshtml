@@ -1,0 +1,39 @@
+﻿@model List<T_ListasClientes>
+<h1>Sala de espera</h1>
+@if (!Model.Any()) { 
+    <div class="text-center">
+        Sin elementos pendientes
+    </div>
+
+}
+
+@foreach(var item in Model.OrderBy(r=>r.ID_ListaNavigation.Descripcion).GroupBy(r => r.ID_ListaNavigation))
+            { 
+                 <h4>@item.Key.Descripcion</h4>
+                 <p>Duracion de atencion: @item.Key.Duracion min por usuario</p>
+
+                 <div class="d-flex justify-content-center">
+                     @foreach (var lista in item.OrderBy(r=>r.Fecha))
+                     {
+
+
+                         <div class="col-2 p-3">
+                             <div class="bg-white text-center p-4">
+                                 @{ 
+                                     var pesona = lista.ID_ClientesNavigation;
+                                     var cedula = lista.ID_ClientesNavigation.Cedula.ToString();
+
+                                 }
+                                 <p>@pesona.Nombre</p>
+                                 <h1>@cedula.Substring(cedula.Length - 3, 3)</h1>
+                                 
+                             </div>
+
+                         </div>
+
+
+                     }
+                 </div>
+
+
+            }

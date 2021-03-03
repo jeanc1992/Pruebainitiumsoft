@@ -1,0 +1,16 @@
+﻿@model T_Clientes
+@{ 
+    var cedulal = @Model.Cedula.ToString().Length;
+}
+<div class="text-center">
+
+    <h1>Bienvenido @Model.Nombre</h1>
+    <partial name="_Notify" />
+    <div class="p-4">
+
+        <p>Su codigo es:</p>
+        <h1>@Model.Cedula.ToString().Substring(cedulal - 3, 3)</h1>
+    </div>
+  
+    <a class="btn btn-success" asp-action="AddCliente" ajax-link="true" ajax-update="#cliente"> Continuar</a>
+</div>

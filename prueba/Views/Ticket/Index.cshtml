@@ -1,0 +1,53 @@
+﻿@model T_Clientes
+@{
+    ViewData["Title"] = "Principal";
+}  
+
+
+<div class="container min-vh-100">
+    <div id="cliente">
+       
+    </div>
+    <div id="listas">
+    </div>
+</div>
+
+
+@section Scripts{ 
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+   <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+   <script>
+        $(function () {
+
+            CargarPerfil();
+            CargarListas();
+            setInterval(CargarListas,30000)
+        });
+        function CargarListas() {
+            var clientetag = $("#listas");
+            clientetag.html(loadingTemplate)
+            $.get("@Url.Action("CargarTablas")", function (response) {
+                clientetag.html(response);
+            });
+        }
+
+        function CargarPerfil() {
+            var clientetag = $("#cliente");
+            clientetag.html(loadingTemplate)
+            $.get("@Url.Action("AddCliente")", function (response) {
+                clientetag.html(response);
+            });
+       }
+
+       function clientSuceess(response) {
+
+           var clientetag = $("#cliente");
+           clientetag.html(response);
+           CargarListas();
+
+
+       }
+
+   </script>
+    
+}

@@ -1,0 +1,43 @@
+﻿@using Newtonsoft.Json;
+
+@if (TempData["notify"] != null)
+{
+    var deficition = new { Tipo = "", Message = "" };
+    var json = JsonConvert.DeserializeAnonymousType(TempData["notify"].ToString(),deficition);
+    if (json.Tipo == "success")
+    {
+<div class="alert alert-success remark" role="alert">
+    @json.Message
+</div>
+    }
+    else if (json.Tipo == "error")
+    {
+<div class="alert alert-danger remark" role="alert">
+    @json.Message
+
+</div>
+    }
+    else
+    {
+<div class="alert alert-warning remark" role="alert">
+
+    @json.Message
+
+</div>
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
